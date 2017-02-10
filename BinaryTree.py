@@ -74,17 +74,30 @@ class BinaryTree:
     
     def traverseTreePostfix(self, root):
         if root is None:
-            return root
-        if root.left is not None:
-            self.traverseTreePostfix(root.left)
-        if root.right is not None:
-            self.traverseTreePostfix(root.right)
+            return
+        self.traverseTreePostfix(root.left)
+        self.traverseTreePostfix(root.right)
         print(root.data)
 
-            
-            
-            
-            
+    def deleteTree(self, root):
+        if self.root.left is None and self.root.right is None:
+            self.root = None
+        else:
+            if root is None:
+                return
+            self.deleteTree(root.left)
+            self.deleteTree(root.right)
+            root = None
+    
+    def find(self, root, value):
+        if root == None:
+            return root
+        if root.data == value:
+            return root
+        elif root.data > value:
+            return self.find(root.left, value)
+        else:
+            return self.find(root.right, value)
             
 class Node:
     def __init__(self, data):
@@ -109,8 +122,8 @@ btree.addNode(btree.root, 20)
 btree.addNode(btree.root, 1)
 btree.addNode(btree.root, 11)
 
-btree.traverseTreePostfix(btree.root)
-
+r = btree.find(btree.root, 22)
+print(r)
 
 
         
