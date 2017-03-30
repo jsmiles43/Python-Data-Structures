@@ -44,6 +44,34 @@ class LinkedList:
             p.next = t.next
             t = None
             
+    def reverseNonResursive(self):
+        prevptr = None;
+        while self.head != None:
+            nextptr = self.head.next;
+            self.head.next = prevptr
+            prevptr = self.head
+            self.head = nextptr
+        self.head = prevptr
+        return self
+
+
+    def reverseRecursive(self):
+        self.head = self.reverseRecursiveHelper(self.head, None)
+        return self
+
+    def reverseRecursiveHelper(self, head, prev):
+        if head == None:
+            return head
+        #elif prev != None:
+        
+        nextptr = head.next
+        head.next = prev
+
+        return self.reverseRecursiveHelper(nextptr, head)
+
+
+
+    
 
 
 class Node:
@@ -70,5 +98,5 @@ linkedlist.add(3)
 linkedlist.add(10)
 linkedlist.add(15)
 
-linkedlist.delete(5)
-print(linkedlist.head)
+print(linkedlist.reverseRecursive())
+#print(linkedlist)
